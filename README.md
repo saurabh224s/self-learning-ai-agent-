@@ -132,7 +132,7 @@ You need to create 2 files. Here's exactly what to do.
 4. A blank file opens in the main editor area. Type the following, replacing the placeholder text with your actual keys:
 
 ```
-OPENAI_API_KEY=sk-your-actual-openai-key-here
+OPENAI_API_KEY=AQ.Ab8RN6LzjfD5e8a31eE2OKhZS0FKrbqmsiv3V9pLUfxVJNA0mw
 MEM0_API_KEY=m0-your-actual-mem0-key-here
 ```
 
