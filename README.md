@@ -1,257 +1,283 @@
-# self-learning-ai-agent-
 
 
+# Complete Guide: Mem0 Memory Chatbot Using Google Gemini's FREE API
 
-# Complete Beginner's Guide: Running the Mem0 AI Memory Chatbot on Your PC
-
-**What this project does:** It builds a chatbot that *remembers* things you tell it across multiple conversations — powered by OpenAI (ChatGPT) for intelligence and Mem0 for memory storage. When you close and reopen it, it still knows who you are.
+**Zero cost. No credit card. Uses Google's free Gemini API only.**
 
 ---
 
-## BEFORE YOU START — What You Need to Get First
-
-You will need **3 things** before touching any code:
-
-1. **An OpenAI API Key** (costs a small amount of money — $5 credit lasts a long time)
-2. **A Mem0 API Key** (free tier gives you 10,000 memories/month — more than enough)
-3. **A computer running Windows** (this guide assumes Windows; say if you use Mac)
+## WHAT YOU NEED FIRST — 2 API Keys (Both Free)
 
 ---
 
-## PHASE 1 — Get Your API Keys
+## STEP 1 — Get Your FREE Google Gemini API Key
 
-### Step 1: Get Your OpenAI API Key
+Go to **https://aistudio.google.com/app/apikey**, sign in with your Google account, and click **"Create API key"**. The free tier works immediately — no billing required. [Apideck](https://www.apideck.com/blog/how-to-get-your-gemini-api-key)
 
-1. Open your browser. Go to: **https://platform.openai.com**
-2. Click **"Sign up"** (top right). Create an account with your email.
-3. After logging in, click your profile icon (top right) → click **"API keys"**
-4. Click the button **"+ Create new secret key"**
-5. Give it a name (type anything, like `my-chatbot`) → click **"Create secret key"**
-6. You will see a long code starting with `sk-`. **COPY IT NOW** and paste it somewhere safe (Notepad, Notes app). You will NEVER see it again after closing this window.
+Here's the exact click-by-click:
 
-> **Cost note:** You need to add a small payment method. Go to **Billing** → **Add payment method** → add a card. Add $5 in credits. This project will cost pennies per conversation.
+1. Open your browser → go to **https://aistudio.google.com**
+2. Sign in with your **Google/Gmail account**
+3. On the first visit, accept Google's terms of service → click **"I agree"**
+4. In the left sidebar, click **"Get API key"**
+5. Click the blue button **"Create API key"**
+6. It will say **"Create API key in new project"** → click **"Create API key in new project"**
+7. Your key appears — it starts with `AIza` followed by many characters
+8. Click the **copy icon** next to the key
+9. Open **Notepad** on your PC (press Windows key → type Notepad → press Enter) and paste the key there. Save that file.
+
+> Unlike OpenAI, Google lets you view your key again later from the AI Studio dashboard — so you can always go back to https://aistudio.google.com/app/apikey to see it again if you lose it. [Apideck](https://www.apideck.com/blog/how-to-get-your-gemini-api-key)
+
+> **Free tier limits:** The free (Hobby) tier gives you real usage at no cost. Rate limits on the free tier are approximately 10 requests per minute on Gemini 2.5 Flash — more than enough for personal use. [The AI Agent Index](https://theaiagentindex.com/agents/mem0) [Apideck](https://www.apideck.com/blog/how-to-get-your-gemini-api-key)
 
 ---
 
-### Step 2: Get Your Mem0 API Key
+## STEP 2 — Get Your FREE Mem0 API Key
 
 1. Go to: **https://app.mem0.ai**
-2. Click **"Sign up"** → create an account with Google or email
+2. Click **"Sign up"** → sign up with your Google account or email
 3. After logging in, look at the left sidebar → click **"API Keys"**
 4. Click **"Create API Key"** or **"Generate Key"**
-5. **Copy the key** — it starts with `m0-`. Paste it in that same Notepad file.
+5. Copy the key — it starts with `m0-`
+6. Paste it into that same Notepad file next to your Gemini key
 
-> **Free tier:** 10,000 memory add requests + 1,000 retrieval calls per month. Plenty for personal use.
+> The free Hobby tier gives you 10,000 memory add requests and 1,000 retrieval calls per month — enough for thousands of personal conversations. [The AI Agent Index](https://theaiagentindex.com/agents/mem0)
 
 ---
 
-## PHASE 2 — Install Python
-
-### Step 3: Install Python on Your PC
-
-Python is the programming language this project runs in. You need it installed first.
+## STEP 3 — Install Python
 
 1. Go to: **https://www.python.org/downloads/**
-2. Click the big yellow button that says **"Download Python 3.x.x"** (whatever the latest 3.x version is)
-3. The file downloads (it's about 25MB). Double-click it to open the installer.
-4. **CRITICAL — Before clicking Install:** At the bottom of the installer window, you will see a checkbox that says **"Add Python to PATH"**. **CHECK THAT BOX.** This is the #1 mistake beginners make. If you miss this, nothing will work.
+2. Click the big yellow **"Download Python 3.x.x"** button
+3. The installer downloads. **Double-click it** to run it.
+4. ⚠️ **CRITICAL:** At the bottom of the installer, check the box that says **"Add Python to PATH"**. If you miss this, nothing works.
 5. Click **"Install Now"**
-6. Wait for it to finish. Click **"Close"**
+6. Click **"Close"** when done
 
-**Verify Python installed correctly:**
-1. Press the **Windows key** on your keyboard
-2. Type `cmd` → press **Enter** (this opens a black Command Prompt window)
-3. In the black window, type exactly:
-   ```
-   python --version
-   ```
-4. Press **Enter**. You should see something like `Python 3.12.3`. If you see that, Python is installed. ✅
+**Verify it worked:**
+1. Press **Windows key** → type `cmd` → press **Enter**
+2. In the black window, type: `python --version` → press **Enter**
+3. You should see: `Python 3.x.x` ✅
 
 ---
 
-## PHASE 3 — Install VS Code
-
-### Step 4: Download and Install VS Code
-
-VS Code is a free code editor where you will write and run the code.
+## STEP 4 — Install VS Code
 
 1. Go to: **https://code.visualstudio.com/**
-2. Click the big blue **"Download for Windows"** button
-3. The installer downloads (about 90MB). Double-click it.
-4. Accept the agreement → click **Next** → keep clicking **Next** until you reach a screen with checkboxes
-5. **Check the box** that says **"Add to PATH"** and **"Open with Code"** (check all options you see)
-6. Click **Install** → wait → click **Finish**
-7. VS Code will open automatically
+2. Click **"Download for Windows"**
+3. Run the installer → keep clicking **Next**
+4. On the options screen, **check all the boxes** you see (especially "Add to PATH")
+5. Click **Install** → click **Finish**
+6. VS Code opens automatically
+
+**Install the Python extension inside VS Code:**
+1. Click the **grid/squares icon** on the left sidebar (Extensions)
+2. In the search box, type: `Python`
+3. Click **Install** on the first result (by Microsoft)
 
 ---
 
-### Step 5: Set Up VS Code (One-Time Setup)
+## STEP 5 — Create Your Project Folder
 
-When VS Code opens for the first time:
-
-1. You'll see a welcome screen. Close the welcome tab by clicking the **X** on the "Welcome" tab at the top.
-2. On the left side, you see a column of icons. Click the one that looks like **4 squares** (Extensions icon — it's the bottom icon in the top group, looks like a grid).
-3. In the search box that appears, type: `Python`
-4. The first result says **"Python"** by **Microsoft**. Click the blue **"Install"** button next to it.
-5. Wait for it to install (30 seconds). Done. ✅
+1. Press **Windows + E** to open File Explorer
+2. Go to your **Desktop**
+3. Right-click → **New** → **Folder**
+4. Name it: `gemini-memory-chat` → press **Enter**
 
 ---
 
-## PHASE 4 — Create Your Project Folder
+## STEP 6 — Open the Folder in VS Code
 
-### Step 6: Create a Folder for the Project
-
-1. Open **File Explorer** (the folder icon in your taskbar, or press **Windows + E**)
-2. Navigate to your **Desktop** (or Documents — wherever you want)
-3. Right-click in an empty area → **New** → **Folder**
-4. Name the folder: `mem0-chatbot`
-5. Press **Enter**
+1. In VS Code → click **File** → **Open Folder**
+2. Click on `gemini-memory-chat` → click **"Select Folder"**
+3. If it asks "Do you trust the authors?" → click **"Yes, I trust the authors"**
 
 ---
 
-### Step 7: Open the Folder in VS Code
+## STEP 7 — Create the `.env` File (Your Keys)
 
-1. Go back to VS Code
-2. Click **File** (top left menu) → **Open Folder**
-3. Navigate to the `mem0-chatbot` folder you just created on your Desktop
-4. Click on it once to select it → click **"Select Folder"**
-5. VS Code may ask **"Do you trust the authors of the files in this folder?"** — Click **"Yes, I trust the authors"**
-6. You will now see your empty folder in the left panel of VS Code
-
----
-
-## PHASE 5 — Create the Project Files
-
-You need to create 2 files. Here's exactly what to do.
-
-### Step 8: Create the `.env` File (Your Secret Keys File)
-
-1. In VS Code, look at the left panel — you should see `MEM0-CHATBOT` written at the top
-2. Click the **New File** icon (it looks like a page with a + sign, next to the folder name)
-3. Type exactly: `.env` (with a dot at the beginning) → press **Enter**
-4. A blank file opens in the main editor area. Type the following, replacing the placeholder text with your actual keys:
+1. In VS Code's left panel, click the **New File icon** (page with a + sign)
+2. Type: `.env` → press **Enter**
+3. In the file, type this — replacing the placeholder text with your actual keys:
 
 ```
-OPENAI_API_KEY=
+GEMINI_API_KEY=AIza-your-actual-gemini-key-here
 MEM0_API_KEY=m0-your-actual-mem0-key-here
 ```
 
-> **Example of what it looks like with real keys:**
-> ```
-> OPENAI_API_KEY=sk-proj-abc123def456ghi789...
-> MEM0_API_KEY=m0-xyz987uvw654rst321...
-> ```
+**Example of what it looks like with real keys:**
+```
+GEMINI_API_KEY=AIzaSyBxyz1234abcdefghij5678KLMN
+MEM0_API_KEY=m0-abc123def456ghi789xyz
+```
 
-5. Press **Ctrl + S** to save the file.
-
-> ⚠️ **This file contains your secret keys. Never share it with anyone. Never upload it to the internet.**
+4. Press **Ctrl + S** to save
 
 ---
 
-### Step 9: Create the Main Python File
+## STEP 8 — Create the `requirements.txt` File
 
-1. Click the **New File** icon again in the left panel
-2. Type: `chatbot.py` → press **Enter**
-3. A blank file opens. Copy and paste ALL of the following code into it:
+1. Click **New File icon** again
+2. Name it: `requirements.txt` → press **Enter**
+3. Paste this:
+
+```
+google-genai
+mem0ai
+python-dotenv
+```
+
+4. Press **Ctrl + S** to save
+
+---
+
+## STEP 9 — Create the Main Chatbot File
+
+1. Click **New File icon** again
+2. Name it: `chatbot.py` → press **Enter**
+3. Paste ALL of this code into it:
 
 ```python
 import os
-from openai import OpenAI
-from mem0 import MemoryClient
+from google import genai
+from mem0 import Memory
 from dotenv import load_dotenv
 
 # Load API keys from .env file
 load_dotenv()
 
-# Initialize clients
-openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-mem0_client = MemoryClient(api_key=os.getenv("MEM0_API_KEY"))
+# Set Gemini API key as environment variable (required by Mem0's Gemini provider)
+os.environ["GEMINI_API_KEY"] = os.getenv("GEMINI_API_KEY")
 
-# Set a user ID — this is how Mem0 identifies who the memories belong to
+# Initialize Google Gemini client
+gemini_client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+# Configure Mem0 to use Gemini for BOTH the LLM and the embedding model
+# This means you need ZERO other API keys — Gemini handles everything
+config = {
+    "embedder": {
+        "provider": "gemini",
+        "config": {
+            "model": "models/text-embedding-004",
+        }
+    },
+    "llm": {
+        "provider": "gemini",
+        "config": {
+            "model": "gemini-2.5-flash",
+            "temperature": 0.0,
+            "max_tokens": 2000,
+        }
+    },
+    "vector_store": {
+        "config": {
+            "embedding_model_dims": 768,
+        }
+    }
+}
+
+# Initialize memory with Gemini config
+memory = Memory.from_config(config)
+
+# Your user ID — this is how Mem0 knows whose memories to retrieve
 USER_ID = "my_user"
 
-def chat(user_message, conversation_history):
-    """Send a message, retrieve memories, get a response, and save the memory."""
+SYSTEM_PROMPT = (
+    "You are a helpful and friendly AI assistant with long-term memory. "
+    "You remember things the user has told you across previous conversations "
+    "and use that context to give more personal and relevant answers."
+)
 
-    # Step 1: Search Mem0 for relevant past memories about this topic
-    memories = mem0_client.search(user_message, user_id=USER_ID)
-    
-    # Step 2: Format memories into a string to include in the prompt
-    memory_context = ""
-    if memories and memories.get("results"):
-        memory_list = [m["memory"] for m in memories["results"]]
-        memory_context = "\n".join(f"- {m}" for m in memory_list)
-    
-    # Step 3: Build the system prompt with memory context
-    system_prompt = "You are a helpful and friendly AI assistant with memory. You remember things users tell you across conversations."
-    
-    if memory_context:
-        system_prompt += f"\n\nRelevant memories about this user:\n{memory_context}"
-    
-    # Step 4: Add user message to conversation history
-    conversation_history.append({"role": "user", "content": user_message})
-    
-    # Step 5: Call OpenAI with full conversation + memory context
-    messages = [{"role": "system", "content": system_prompt}] + conversation_history
-    
-    response = openai_client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=messages,
-        temperature=0.7,
+
+def chat_with_memory(history: list, user_message: str) -> str:
+    """Send a message, fetch relevant memories, get Gemini response, save memory."""
+
+    # Step 1: Search Mem0 for memories relevant to this message
+    relevant_memories = memory.search(query=user_message, user_id=USER_ID, limit=5)
+    memories_str = ""
+    if relevant_memories and relevant_memories.get("results"):
+        memories_str = "\n".join(
+            f"- {entry['memory']}" for entry in relevant_memories["results"]
+        )
+
+    # Step 2: Build system prompt — inject memories if any exist
+    if memories_str:
+        full_system_prompt = (
+            f"{SYSTEM_PROMPT}\n\n"
+            f"Relevant memories about this user:\n{memories_str}"
+        )
+    else:
+        full_system_prompt = SYSTEM_PROMPT
+
+    # Step 3: Add user message to history (Gemini format uses 'user' and 'model')
+    history.append({"role": "user", "parts": [{"text": user_message}]})
+
+    # Step 4: Call Gemini with full conversation history
+    response = gemini_client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=history,
+        config={"system_instruction": full_system_prompt}
     )
-    
-    assistant_reply = response.choices[0].message.content
-    
-    # Step 6: Add assistant reply to conversation history
-    conversation_history.append({"role": "assistant", "content": assistant_reply})
-    
-    # Step 7: Save this exchange to Mem0 memory for future sessions
-    mem0_client.add(
-        [
-            {"role": "user", "content": user_message},
-            {"role": "assistant", "content": assistant_reply}
-        ],
-        user_id=USER_ID
-    )
-    
-    return assistant_reply, conversation_history
+
+    assistant_reply = response.text
+
+    # Step 5: Add Gemini's reply to history
+    history.append({"role": "model", "parts": [{"text": assistant_reply}]})
+
+    # Step 6: Save this exchange to Mem0 for future sessions
+    # Convert history to Mem0's expected format
+    messages_for_mem0 = []
+    for i, turn in enumerate(history):
+        role = "user" if turn["role"] == "user" else "assistant"
+        messages_for_mem0.append({
+            "role": role,
+            "content": turn["parts"][0]["text"]
+        })
+    memory.add(messages_for_mem0, user_id=USER_ID)
+
+    return assistant_reply, history
+
+
+def show_all_memories():
+    """Print everything Mem0 has stored about the user."""
+    print("\n--- Everything I Remember About You ---")
+    all_memories = memory.get_all(user_id=USER_ID)
+    if all_memories and all_memories.get("results"):
+        for i, mem in enumerate(all_memories["results"], 1):
+            print(f"{i}. {mem['memory']}")
+    else:
+        print("Nothing stored yet.")
+    print("---------------------------------------\n")
 
 
 def main():
-    """Main chatbot loop."""
-    print("=" * 50)
-    print("   AI Chatbot with Persistent Memory (Mem0)")
-    print("=" * 50)
-    print("This chatbot remembers you across sessions!")
-    print("Type 'quit' or 'exit' to stop.")
-    print("Type 'memories' to see what the bot remembers about you.")
-    print("-" * 50)
-    
-    conversation_history = []
-    
+    print("=" * 52)
+    print("   Gemini AI Chatbot with Persistent Memory")
+    print("         (Powered by Gemini + Mem0 - FREE)")
+    print("=" * 52)
+    print("Commands:")
+    print("  'memories'  → See what I remember about you")
+    print("  'quit'      → Exit the chatbot")
+    print("-" * 52)
+
+    history = []
+
     while True:
         user_input = input("\nYou: ").strip()
-        
+
         if not user_input:
             continue
-            
+
         if user_input.lower() in ["quit", "exit", "bye"]:
-            print("\nBot: Goodbye! I'll remember our conversation for next time.")
+            print("\nGemini: Goodbye! I'll remember our conversation next time.")
             break
-        
+
         if user_input.lower() == "memories":
-            print("\n--- Your Stored Memories ---")
-            all_memories = mem0_client.get_all(user_id=USER_ID)
-            if all_memories and all_memories.get("results"):
-                for i, mem in enumerate(all_memories["results"], 1):
-                    print(f"{i}. {mem['memory']}")
-            else:
-                print("No memories stored yet.")
-            print("----------------------------")
+            show_all_memories()
             continue
-        
-        print("\nBot: ", end="", flush=True)
-        reply, conversation_history = chat(user_input, conversation_history)
+
+        print("\nGemini: ", end="", flush=True)
+        reply, history = chat_with_memory(history, user_input)
         print(reply)
 
 
@@ -259,27 +285,11 @@ if __name__ == "__main__":
     main()
 ```
 
-4. Press **Ctrl + S** to save.
+4. Press **Ctrl + S** to save
 
----
-
-### Step 10: Create the Requirements File
-
-1. Click the **New File** icon again
-2. Type: `requirements.txt` → press **Enter**
-3. Paste this into it:
-
+**Your folder now has 3 files:**
 ```
-openai
-mem0ai
-python-dotenv
-```
-
-4. Press **Ctrl + S** to save.
-
-**Your folder should now have 3 files:**
-```
-mem0-chatbot/
+gemini-memory-chat/
 ├── .env
 ├── chatbot.py
 └── requirements.txt
@@ -287,167 +297,154 @@ mem0-chatbot/
 
 ---
 
-## PHASE 6 — Install the Libraries
+## STEP 10 — Open the Terminal in VS Code
 
-### Step 11: Open the Terminal in VS Code
-
-1. In VS Code, click **Terminal** in the top menu bar → click **New Terminal**
-2. A black/dark panel opens at the **bottom** of VS Code. This is your terminal.
-3. It should show your folder path, something like: `PS C:\Users\YourName\Desktop\mem0-chatbot>`
+1. In VS Code, click **Terminal** in the top menu → click **New Terminal**
+2. A dark panel opens at the **bottom** of VS Code
+3. You should see your folder path there, like: `PS C:\Users\YourName\Desktop\gemini-memory-chat>`
 
 ---
 
-### Step 12: Install the Required Libraries
+## STEP 11 — Install the Libraries
 
-In the terminal at the bottom of VS Code, type this command **exactly** and press **Enter**:
+In the terminal at the bottom, type this **exactly** and press **Enter**:
 
 ```
 pip install -r requirements.txt
 ```
 
-You will see a lot of text scrolling — this is normal. It's downloading and installing the libraries. Wait until you see something like `Successfully installed ...` and the cursor stops.
+You will see a lot of text scrolling. This is normal — it's downloading everything needed. Wait until it stops and you see `Successfully installed ...`
 
-This takes 1–3 minutes depending on your internet speed.
+This takes 2–4 minutes.
 
-> **If you see an error saying `pip is not recognized`:** Type `python -m pip install -r requirements.txt` instead and press Enter.
+> If you see `pip is not recognized`, type this instead:
+> `python -m pip install -r requirements.txt`
 
 ---
 
-## PHASE 7 — Run the Chatbot
+## STEP 12 — Run the Chatbot
 
-### Step 13: Run the Program
-
-In the same terminal at the bottom of VS Code, type:
+In the same terminal, type:
 
 ```
 python chatbot.py
 ```
 
-Press **Enter**.
-
-You should see:
+Press **Enter**. You will see:
 
 ```
-==================================================
-   AI Chatbot with Persistent Memory (Mem0)
-==================================================
-This chatbot remembers you across conversations!
-Type 'quit' or 'exit' to stop.
-Type 'memories' to see what the bot remembers about you.
---------------------------------------------------
+====================================================
+   Gemini AI Chatbot with Persistent Memory
+         (Powered by Gemini + Mem0 - FREE)
+====================================================
+Commands:
+  'memories'  → See what I remember about you
+  'quit'      → Exit the chatbot
+----------------------------------------------------
 
-You: 
+You:
 ```
 
-**It's working.** ✅
+**It is working.** ✅
 
 ---
 
-## PHASE 8 — How to Use It (With a Real Example)
+## HOW TO USE IT — Real Example with Memory
 
-Here is an actual example conversation showing how the memory works:
-
----
-
-**SESSION 1 — First time you run it:**
+### Session 1 — First conversation:
 
 ```
-You: Hi! My name is Priya and I live in Mumbai.
+You: Hi! My name is Arjun and I live in Bangalore.
 
-Bot: Hi Priya! Great to meet you! Mumbai is such a vibrant city. 
-     How can I help you today?
+Gemini: Hello Arjun! Great to meet you! Bangalore is a wonderful 
+        city — the tech hub of India with great weather. What 
+        can I help you with today?
 
-You: I am a software engineer and I love cooking Indian food.
+You: I am a software engineer and my favorite food is dosa.
 
-Bot: That's wonderful! Software engineering and cooking are both 
-     creative in their own ways. Do you have a favorite dish you 
-     like to make?
+Gemini: That's a great combination! Software engineering and dosas 
+        — both require precision and skill! Do you prefer your 
+        dosa crispy or soft?
 
-You: My favorite dish is butter chicken. I also have a dog named Bruno.
+You: Crispy. And I have a pet cat named Mochi.
 
-Bot: Butter chicken is a classic! And Bruno sounds adorable. 
-     What breed is he?
+Gemini: Crispy dosa is the best! And Mochi is such a cute name 
+        for a cat. How old is Mochi?
 
 You: quit
 
-Bot: Goodbye! I'll remember our conversation for next time.
+Gemini: Goodbye! I'll remember our conversation next time.
 ```
 
-Now **close the terminal**. The program stopped.
+Now **close VS Code entirely**. The program has stopped.
 
 ---
 
-**Run it again** by typing `python chatbot.py` and pressing Enter:
-
-**SESSION 2 — Next time you run it (new session, but with memory):**
+### Session 2 — Reopen VS Code, open the terminal, type `python chatbot.py` again:
 
 ```
-You: What do you know about me?
+You: Do you remember anything about me?
 
-Bot: I remember a few things about you, Priya! You're a software 
-     engineer living in Mumbai, you love cooking Indian food — 
-     especially butter chicken — and you have a dog named Bruno. 
-     Is there anything else you'd like to share or talk about?
+Gemini: Yes! You're Arjun, a software engineer living in Bangalore. 
+        You love crispy dosas, and you have a cat named Mochi. 
+        Is there something specific you'd like to talk about today?
 ```
 
-**The bot remembered everything from the previous session** — even though you closed and reopened the program. That's the Mem0 memory layer working.
+**Gemini remembered everything — even after you closed the program.** That is Mem0 working.
 
 ---
 
-**To see all stored memories at any time**, type:
+### Type `memories` at any time to see the full list:
 
 ```
 You: memories
-```
 
-Output:
-```
---- Your Stored Memories ---
-1. User's name is Priya
-2. Lives in Mumbai
+--- Everything I Remember About You ---
+1. User's name is Arjun
+2. Lives in Bangalore
 3. Works as a software engineer
-4. Loves cooking Indian food
-5. Favorite dish is butter chicken
-6. Has a dog named Bruno
-----------------------------
+4. Favorite food is dosa (crispy)
+5. Has a cat named Mochi
+---------------------------------------
 ```
 
 ---
 
-## Where Is Memory Stored? How Much?
+## Where Are Memories Stored and How Much?
 
-The free (Hobby) tier gives you **10,000 memory add requests** and **1,000 retrieval calls per month**. For personal use, this is enormous — you would need to have thousands of conversations per month to hit that limit. [The AI Agent Index](https://theaiagentindex.com/agents/mem0)
+**Where:** Mem0 uses a dual storage architecture that combines vector embeddings with graph databases for comprehensive memory, stored on **Mem0's cloud servers** — not on your PC. You can also see them visually by logging into **https://app.mem0.ai** → your dashboard. [mem0](https://docs.mem0.ai/llms.txt)
 
-**Where the memories physically live:** They are stored **in Mem0's cloud servers** (not on your PC). Mem0 combines vector embeddings with database storage for comprehensive memory. You can see all your stored memories by logging into **https://app.mem0.ai** → your dashboard → you'll see a visual list of everything the bot has learned about you. [mem0](https://docs.mem0.ai/llms.txt)
+**How it stores:** Mem0 does not save your entire conversation word-for-word. It uses Gemini itself to extract only the important facts — so "Hi, my name is Arjun and I like crispy dosas" becomes stored as the compact fact: `User's name is Arjun`, `Likes crispy dosas`. Very space-efficient.
 
-**How much memory is stored per conversation:** Mem0 doesn't store the entire conversation word-for-word. It uses an LLM to extract key facts and preferences, storing them as compressed memory entries. So "Hi, I'm Priya, I'm a software engineer in Mumbai with a dog named Bruno who loves butter chicken" gets broken down into compact facts like: `name: Priya`, `location: Mumbai`, `profession: software engineer`, `pet: dog named Bruno`, `food preference: butter chicken`. Each fact is a separate memory entry — very space-efficient. [GitHub](https://github.com/mem0ai/mem0)
-
----
-
-## Common Errors and How to Fix Them
-
-**Error: `ModuleNotFoundError: No module named 'openai'`**
-→ You skipped Step 12. Run `pip install -r requirements.txt` again.
-
-**Error: `AuthenticationError` or `Invalid API key`**
-→ Your API key in `.env` is wrong. Open `.env`, double-check you copied the full key with no spaces.
-
-**Error: `openai.RateLimitError`**
-→ You haven't added billing/credits to your OpenAI account. Go to https://platform.openai.com/settings/billing and add $5.
-
-**Error: `.env` file not loading / keys not found**
-→ Make sure the `.env` file is in the same folder as `chatbot.py`. Open the terminal and verify with: `dir` (Windows) — you should see both files listed.
-
-**The terminal says `python is not recognized`**
-→ Python wasn't added to PATH. Reinstall Python from python.org and make sure you check the "Add Python to PATH" box during installation.
+**How much is free:** The free Hobby tier gives you 10,000 memory add requests and 1,000 retrieval calls per month. For a personal chatbot used daily, you would need to have hundreds of conversations every single day to come close to that limit. [The AI Agent Index](https://theaiagentindex.com/agents/mem0)
 
 ---
 
-## Quick Reference Card
+## Common Errors and Fixes
 
-| Action | Command in Terminal |
-|--------|-------------------|
+**`ModuleNotFoundError: No module named 'google'`**
+→ Run `pip install -r requirements.txt` again in the terminal.
+
+**`API_KEY_INVALID` or `AuthenticationError`**
+→ Your key in `.env` is wrong. Go back to https://aistudio.google.com/app/apikey, copy the key again, and paste it carefully into `.env`. Make sure there are no spaces before or after the key.
+
+**`python is not recognized`**
+→ Python wasn't added to PATH. Reinstall Python from python.org and check the "Add Python to PATH" box.
+
+**`pip is not recognized`**
+→ Use `python -m pip install -r requirements.txt` instead.
+
+**The program runs but gives an error about Mem0 key**
+→ Check your `.env` file. The Mem0 key line must start with `MEM0_API_KEY=` exactly.
+
+---
+
+## Quick Reference
+
+| What you want to do | What to type |
+|---|---|
 | Start the chatbot | `python chatbot.py` |
-| See stored memories | Type `memories` while chatbot is running |
-| Stop the chatbot | Type `quit` or `exit` |
+| See all stored memories | Type `memories` while chatbot is running |
+| Stop the chatbot | Type `quit` |
 | Reinstall libraries | `pip install -r requirements.txt` |
+| Get your Gemini key again | Visit https://aistudio.google.com/app/apikey |
